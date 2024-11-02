@@ -9,6 +9,8 @@
 # mnist_dd_utils.py
 import numpy as np
 import torch
+import cv2
+import os
 from torch.utils.data import Dataset
 
 class MNISTDDDataset(Dataset):
@@ -72,22 +74,3 @@ def prepare_yolo_dataset(npz_file, output_dir):
         # Save labels
         label_path = os.path.join(labels_dir, f'{idx:06d}.txt')
         np.savetxt(label_path, yolo_boxes, fmt='%g')
-
-def train_yolo():
-    """Train YOLOv5 model"""
-    # Clone YOLOv5 repository
-    !git clone https://github.com/ultralytics/yolov5
-    
-    # Create YAML config
-    data_yaml = """
-    train: ../data/train/images
-    val: ../data/valid/images
-    nc: 10  # number of classes
-    names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']  # class names
-    """
-    
-    with open('data.yaml', 'w') as f:
-        f.write(data_yaml)
-    
-    # Train model
-    !python yolov5/train.py --img 64 --batch 32 --epochs 50 --data data.yaml --cfg yolov5s.yaml --weights '' --name mnist_dd
