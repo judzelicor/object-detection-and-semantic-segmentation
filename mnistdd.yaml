@@ -1,0 +1,7 @@
+# YOLOv5 configuration for MNIST Double Digits dataset
+train: ../data/train/images  # path to training images
+val: ../data/valid/images    # path to validation images
+
+# Classes
+nc: 10  # number of classes
+names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']  # class names
